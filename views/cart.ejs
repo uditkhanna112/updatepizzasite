@@ -1,0 +1,147 @@
+<html>
+    <title>
+Home
+    </title>
+<head>
+    
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="/assets/cart.css">
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Noto Serif">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto Slab">
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Acme">
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Solway">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<title>Covid19</title>
+<body>
+<div class="bodi">
+    <nav class="navbar navbar-expand-lg  bg-llight">
+        <a class="navbar-brand" href="/"><img src="/assets/2.jpg" class="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="mynavbar-toggler-icon">
+            <i class="fa fa-navicon" style="color:#fff; font-size:28px;"></i>
+          </span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/#home">Menu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#feedback">Feedback</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#contact2">Contact Us</a>
+              </li>
+
+            </ul>
+            
+
+            
+            </div> 
+      </nav>
+
+      <div class="jumbotronn" >
+        <div class="container">
+        <h2>Cart</h2>
+
+    </div>
+    </div>
+  
+
+</div>
+<section id="caart">
+<% if(total_price>0){ %>
+<table>
+    <thead class="thead">
+      <tr>
+        <th></th>
+          <th>Pizza</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+<% x.forEach(function(arr){ %>
+        <% if(arr.incart>0&&total_price>0){ %>
+      <tr>
+        <td  class="trow"><img src='<%= arr.src %>' height="40" width="40" ></td>
+        <td  class="trow"><%=arr.name %></td>
+        <td  class="trow"><%=arr.price %></td>
+        <td  class="trow">
+          
+          <a onclick="M.toast({html: 'Removed successfully',displayLength:500
+          , completeCallback: function(){
+              
+              window.location.reload(true);}})" href='/cartremove/<%= arr.id %>'">-</a>
+          <span><%=arr.incart%></span>
+          <a id="abc" onclick="M.toast({html: 'Added to cart successfully',displayLength:500
+          , completeCallback: function(){
+            
+              window.location.reload(true);}})" href='/cartadd/<%= arr.id %>'  ">+</a>
+        </td>
+        <td><%=arr.total %></td>
+      </tr>
+     
+      <% }})}else{; %>
+<div class="container">
+        <h1 class="hh">
+  The cart is empty
+  <br>
+  <p><a href="/#home">Add items to cart</a></p>
+</h1>
+
+<br>
+</div>
+<%}%>
+      <% if(total_price>0){ %>
+      <tr>
+        <td> </td>
+        <td>
+          
+           </td>
+        <th>Total Price:- </hd>
+      <th><%=total_price %></th>
+    
+    </tr>
+    <% }else{%>
+      <tr>
+        <td> </td>
+        <td> </td>
+        <th>Total Price:- </hd>
+      <th>0</th>
+    </tr>
+    <% }%>
+    </tbody>
+  </table>
+<% if(total_price>0){ %>
+  <div>
+    <a id="myButtonId" href="/resetcart" >Reset Cart</a>
+    <a class="btn btn-success" href="/checkout/#check"> Proceed To Checkout</a>
+  </div>
+  <% } %>
+</section>
+<script>
+window.onunload = function() {
+    alert('Bye.');
+}
+  setInterval(function () {document.getElementById("myButtonId").click();},3600000);
+</script>
+</body>
+</html>
